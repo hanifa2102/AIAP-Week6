@@ -21,17 +21,13 @@ class PreprocessData:
         arguments = {"keywords":imageNames,"limit":100,"print_urls":True}   #creating list of arguments
         paths = response.download(arguments)   #passing the arguments to the function
         self.paths=paths
-    def loadAllImages(self):
-        img_dir='/home/hanifa/workspace/AIAP/AIAP-Week6/downloads/'
+    def loadAllImages(self,img_dir):
+        #img_dir='/home/hanifa/workspace/AIAP/AIAP-Week6/downloads/'
         self.apples=[img_dir+'Apples/'+i for i in os.listdir(img_dir+'Apples/')]
         self.oranges=[img_dir+'Oranges/'+i for i in os.listdir(img_dir+'Oranges/')]
         self.pears=[img_dir+'Pears/'+i for i in os.listdir(img_dir+'Pears/')]
         self.allImg=self.apples+self.oranges+self.pears
         
-        
-        
-        
-
 if __name__=="__main__":
     #one=PreprocessData()
     #one.downloadData("Apples,Pears,Oranges")
