@@ -16,7 +16,7 @@ import cv2
 
 class PreprocessData:
     def __init__(self):
-        print("hello")
+        print("Constructor Init...")
     def downloadData(self,imageNames):
         response = google_images_download.googleimagesdownload()   #class instantiation
         arguments = {"keywords":imageNames,"limit":100,"print_urls":True}   #creating list of arguments
@@ -29,25 +29,25 @@ class PreprocessData:
         self.pears=[img_dir+'Pears/'+i for i in os.listdir(img_dir+'Pears/')]
         self.allImg=self.apples+self.oranges+self.pears
         
-    def createDataset(self,data,i):
-        for f in data:
-            img=cv2.resize(cv2.imread(f),(224,224),interpolation=cv2.INTER_CUBIC)
-            RGB_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-            self.X.append(RGB_img)
-            self.y.append(i)
-            
-    def getTestImages(self):
-        img_dir='/home/hanifa/workspace/AIAP/AIAP-Week6/downloads_test/'
-        apples=[img_dir+'Apples/'+i for i in os.listdir(img_dir+'Apples/')]
-        oranges=[img_dir+'Oranges/'+i for i in os.listdir(img_dir+'Oranges/')]
-        pears=[img_dir+'Pears/'+i for i in os.listdir(img_dir+'Pears/')]
-        allImg=apples+oranges+pears
-        
-        self.X=[]
-        self.y=[]
-        self.createDataset(apples,0)
-        self.createDataset(pears,1)
-        self.createDataset(oranges,2)   
+#    def createDataset(self,data,i):
+#        for f in data:
+#            img=cv2.resize(cv2.imread(f),(224,224),interpolation=cv2.INTER_CUBIC)
+#            RGB_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+#            self.X.append(RGB_img)
+#            self.y.append(i)
+#            
+#    def getTestImages(self):
+#        img_dir='/home/hanifa/workspace/AIAP/AIAP-Week6/downloads_test/'
+#        apples=[img_dir+'Apples/'+i for i in os.listdir(img_dir+'Apples/')]
+#        oranges=[img_dir+'Oranges/'+i for i in os.listdir(img_dir+'Oranges/')]
+#        pears=[img_dir+'Pears/'+i for i in os.listdir(img_dir+'Pears/')]
+#        allImg=apples+oranges+pears
+#        
+#        self.X=[]
+#        self.y=[]
+#        self.createDataset(apples,0)
+#        self.createDataset(pears,1)
+#        self.createDataset(oranges,2)   
         
 if __name__=="__main__":
     one=PreprocessData()
