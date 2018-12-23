@@ -24,12 +24,11 @@ import tensorflow as tf
 from keras.backend.tensorflow_backend import set_session
 
 config = tf.ConfigProto(
-    gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.8),
-    device_count = {'GPU': 1}
+    gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.8)
 )
 config.gpu_options.allow_growth = True
 session = tf.Session(config=config)
-set_session(session)*/
+set_session(session)
 '''
 '''
 import tensorflow as tf
@@ -44,13 +43,16 @@ app.config['UPLOADED_PHOTOS_DEST'] = os.getcwd()
 photos = UploadSet('photos', IMAGES)
 configure_uploads(app, photos)
 patch_request_class(app)  # set maximum file size, default is 16MB
+
 global new_model
 new_model = load_model('model_keras.h5')
 new_model._make_predict_function()
-#from keras.applications.resnet50 import ResNet50
-#global new_model
-#new_model = ResNet50(weights='imagenet')
 
+'''
+from keras.applications.resnet50 import ResNet50
+global new_model
+new_model = ResNet50(weights='imagenet')
+'''
 
 
 class UploadForm(FlaskForm):
@@ -66,9 +68,12 @@ def classifiyImage(img):
     '''
     with graph.as_default():
         '''
+    
     prob=new_model.predict(img)
+    '''
     classes=new_model.predict_classes(img)
     print("Our algorithm says it is %s with a %d%% accuracy" %(y_mapping[classes[0]],int(prob[0][classes][0]*100)))
+    '''
 #    return y_mapping[classes[0]],int(prob[0][classes][0]*100)
 
 @app.route('/', methods=['GET', 'POST'])
